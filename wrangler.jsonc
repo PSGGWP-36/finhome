@@ -1,0 +1,13 @@
+// Cloudflare Workers static-assets config for FinHome (no server code)
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "finhome",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./",
+    // serve 404.html for unknown addresses
+    "not_found_handling": "404-page",
+    // /buy.html -> /buy (same as current behaviour)
+    "html_handling": "auto-trailing-slash"
+  }
+}

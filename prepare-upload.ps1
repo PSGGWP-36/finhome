@@ -1,4 +1,5 @@
-# Copies only the website files into ..\FinHome-upload for Cloudflare Pages.
+# Copies only the website files into ..\FinHome-upload (for a manual drag-and-drop upload).
+# Not needed when Cloudflare deploys from GitHub: wrangler.jsonc + .assetsignore handle that.
 # Run from the FinHome folder:  powershell -ExecutionPolicy Bypass -File .\prepare-upload.ps1
 $ErrorActionPreference = 'Stop'
 $src = $PSScriptRoot
