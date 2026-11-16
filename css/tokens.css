@@ -1,0 +1,52 @@
+/* FinHome Design System tokens (from Claude Design handoff) */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Anuphan:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  /* Midnight Blue — primary (brand = 700) */
+  --navy-50:#EEF2FB;--navy-100:#DCE4F6;--navy-200:#B9C8EC;--navy-300:#8AA3DC;--navy-400:#5677C4;--navy-500:#2F55B0;--navy-600:#24479C;--navy-700:#1E3A8A;--navy-800:#172E6E;--navy-900:#0F1F4D;--navy-950:#0A1533;
+  /* Warm Gold / Amber — accent (brand = 600) */
+  --gold-50:#FFF8EB;--gold-100:#FEEDC7;--gold-200:#FCD98A;--gold-300:#FAC04D;--gold-400:#F5A524;--gold-500:#E88B0C;--gold-600:#D97706;--gold-700:#B45F06;--gold-800:#8F4A0A;--gold-900:#6F3A0C;
+  /* Cool slate neutrals */
+  --slate-0:#FFFFFF;--slate-25:#FAFBFD;--slate-50:#F4F6FA;--slate-100:#E9EDF4;--slate-200:#D7DDE8;--slate-300:#B8C1D1;--slate-400:#8D98AD;--slate-500:#66728A;--slate-600:#4A556B;--slate-700:#343D50;--slate-800:#222938;--slate-900:#141925;
+  /* Semantic bases */
+  --green-50:#E8F7F0;--green-100:#C8EDDC;--green-500:#14A06D;--green-600:#0F8A5F;--green-700:#0B6E4B;
+  --red-50:#FDECEC;--red-100:#F9D0D1;--red-500:#E5484D;--red-600:#D1343A;--red-700:#A8262B;
+
+  --brand-primary:var(--navy-700);--brand-primary-hover:var(--navy-800);--brand-primary-press:var(--navy-900);
+  --brand-accent:var(--gold-600);--brand-accent-hover:var(--gold-700);--brand-accent-press:var(--gold-800);
+
+  --text-strong:var(--slate-900);--text-body:var(--slate-700);--text-muted:var(--slate-500);--text-subtle:var(--slate-400);
+  --text-on-primary:#FFFFFF;--text-on-accent:#FFFFFF;--text-link:var(--navy-600);--text-link-hover:var(--navy-800);
+
+  --surface-page:var(--slate-25);--surface-card:#FFFFFF;--surface-sunken:var(--slate-50);--surface-muted:var(--slate-100);
+  --surface-inverse:var(--navy-950);--surface-inverse-2:var(--navy-900);
+  --surface-brand-tint:var(--navy-50);--surface-accent-tint:var(--gold-50);
+
+  --border-subtle:var(--slate-100);--border-default:var(--slate-200);--border-strong:var(--slate-300);--border-focus:var(--navy-500);
+  --border-inverse:rgba(255,255,255,.12);
+
+  --status-success:var(--green-600);--status-success-bg:var(--green-50);
+  --status-danger:var(--red-600);--status-danger-bg:var(--red-50);
+  --money-saving:var(--green-600);
+
+  --focus-ring:0 0 0 3px rgba(47,85,176,.28);
+
+  --font-display:'Prompt',system-ui,sans-serif;
+  --font-body:'Anuphan','Prompt',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --radius-xs:6px;--radius-sm:10px;--radius-md:14px;--radius-lg:20px;--radius-xl:28px;--radius-pill:999px;
+
+  --shadow-xs:0 1px 2px rgba(15,31,77,.06);
+  --shadow-sm:0 1px 2px rgba(15,31,77,.05),0 2px 8px rgba(15,31,77,.06);
+  --shadow-md:0 2px 4px rgba(15,31,77,.04),0 8px 24px rgba(15,31,77,.08);
+  --shadow-lg:0 4px 8px rgba(15,31,77,.04),0 20px 48px rgba(15,31,77,.12);
+  --shadow-gold:0 6px 20px rgba(217,119,6,.28);
+  --shadow-navy:0 6px 20px rgba(30,58,138,.28);
+
+  --container-max:1200px;
+  --nav-height:72px;
+
+  --ease-out:cubic-bezier(.2,.8,.2,1);
+  --dur-fast:120ms;--dur-base:200ms;--dur-slow:360ms;
+}

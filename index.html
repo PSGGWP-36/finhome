@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinHome — วางแผนสินเชื่อบ้าน คำนวณกู้บ้าน Refinance โปะบ้าน ลดหย่อนภาษี</title>
+<meta name="description" content="FinHome ผู้ช่วยการเงินเรื่องบ้าน คำนวณวงเงินกู้ ค่างวด เปรียบเทียบ Refinance กับ Retention คำนวณโปะบ้าน ลดหย่อนภาษี และสร้างเอกสารสรุป PDF ฟรี คำนวณในเครื่องคุณ ไม่เก็บข้อมูล">
+<meta name="theme-color" content="#1E3A8A">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=16">
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous" defer></script>
+<script src="js/core.js?v=5" defer></script>
+<script>addEventListener('DOMContentLoaded', function () { FH.layout(''); FH.icons(); });</script>
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+<!-- ============ Hero ============ -->
+<section class="container hero" aria-label="แนะนำ FinHome">
+  <div class="hero__copy">
+    <div class="eyebrow">ผู้ช่วยการเงินเรื่องบ้าน ให้ทุกการผ่อน “ฟิน” ขึ้น</div>
+    <h1>วางแผนสินเชื่อบ้านอย่างมืออาชีพ รู้ทันทุกดอกเบี้ยและต้นทุนแฝง</h1>
+    <p class="hero__lead">FinHome คำนวณความคุ้มค่าให้ครบในที่เดียว ทั้ง<b>คนอยากมีบ้าน</b> ที่ต้องรู้วงเงินกู้และค่างวด และ&nbsp;<b>คนผ่อนบ้านอยู่</b> ที่อยากรู้ว่า Refinance หรือ Retention แบบไหนเหลือเงินมากกว่า พร้อมเอกสารสรุป PDF ไปคุยกับธนาคาร</p>
+    <div class="choice-grid">
+      <a class="choice choice--light" href="buy.html">
+        <span class="icon-tile"><i data-lucide="house" width="24" height="24"></i></span>
+        <span>
+          <span class="choice__title" style="display:block">ฉันกำลังจะซื้อบ้านใหม่</span>
+          <span class="choice__sub" style="display:block">คำนวณวงเงินกู้ / ค่างวด / ความพร้อม</span>
+        </span>
+        <span class="choice__cta">เริ่มคำนวณ <i data-lucide="arrow-right" width="18" height="18"></i></span>
+      </a>
+      <a class="choice choice--navy" href="refinance.html">
+        <span class="icon-tile" style="background:rgba(255,255,255,.1);color:var(--gold-300)"><i data-lucide="repeat" width="24" height="24"></i></span>
+        <span>
+          <span class="choice__title" style="display:block">ฉันผ่อนบ้านอยู่แล้ว</span>
+          <span class="choice__sub" style="display:block">เปรียบเทียบ Refinance vs Retention</span>
+        </span>
+        <span class="choice__cta">เช็กว่าคุ้มไหม <i data-lucide="arrow-right" width="18" height="18"></i></span>
+      </a>
+    </div>
+    <div class="trust">
+      <span><i data-lucide="shield-check" width="16" height="16"></i>คำนวณในเครื่องคุณ ไม่เก็บข้อมูล</span>
+      <span><i data-lucide="clock" width="16" height="16"></i>ผลลัพธ์ภายใน 2 นาที</span>
+      <span><i data-lucide="file-text" width="16" height="16"></i>ดาวน์โหลดสรุปเป็น PDF</span>
+    </div>
+  </div>
+
+  <div class="hero__visual" aria-label="ตัวอย่างผลวิเคราะห์">
+    <div class="card preview">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div class="label-sm">ตัวอย่างผลวิเคราะห์ · ยอดหนี้ ฿2,450,000</div>
+        <span class="badge badge--solid">คุ้มที่สุด</span>
+      </div>
+      <div>
+        <div class="disp strong" style="font-weight:600;font-size:24px">Refinance คุ้มกว่า</div>
+        <div class="disp" style="font-weight:600;font-size:40px;color:var(--money-saving);line-height:1.15;margin-top:4px">+฿57,320</div>
+        <div class="muted" style="font-size:14px">ประหยัดสุทธิใน 3 ปี หลังหักต้นทุนแฝงแล้ว</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="mini-bar"><span>ลอยตัว MRR</span><span class="mini-bar__track" style="background:var(--slate-200)"><span class="mini-bar__fill" style="width:100%;background:var(--slate-400)"></span></span><span class="mini-bar__val">฿479,210</span></div>
+        <div class="mini-bar"><span>Retention</span><span class="mini-bar__track"><span class="mini-bar__fill" style="width:73%;background:var(--navy-300)"></span></span><span class="mini-bar__val">฿350,880</span></div>
+        <div class="mini-bar"><span>Refinance</span><span class="mini-bar__track"><span class="mini-bar__fill" style="width:61%;background:var(--navy-700)"></span></span><span class="mini-bar__val">฿293,560</span></div>
+        <div style="font-size:12px;color:var(--text-subtle)">ดอกเบี้ย + ต้นทุนแฝงรวม 3 ปี</div>
+      </div>
+      <div class="grid-2 grid-2--12">
+        <div class="tile tile--sunken"><div class="muted" style="font-size:12px">คืนทุนค่าย้ายเดือนที่</div><div class="disp strong" style="font-weight:600;font-size:22px">19</div></div>
+        <div class="tile tile--gold"><div style="font-size:12px;color:var(--gold-800)">Target Retention</div><div class="disp" style="font-weight:600;font-size:22px;color:var(--gold-700)">≤ 4.38%</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Tools ============ -->
+<section id="tools" class="container section">
+  <div class="eyebrow">เครื่องมือทั้งหมด</div>
+  <h2 class="h2">ทุกเรื่องบ้าน คำนวณจบในที่เดียว</h2>
+  <div class="tools">
+    <a class="card tool" href="buy.html">
+      <span class="icon-tile"><i data-lucide="house" width="24" height="24"></i></span>
+      <span class="tool__title">คำนวณกู้บ้านใหม่</span>
+      <span class="tool__body">วงเงินกู้สูงสุดตาม DSR ค่างวด ค่าใช้จ่ายวันโอน และค่างวดถ้าดอกเบี้ยขึ้น</span>
+      <span class="tool__cta">เริ่มคำนวณ <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a class="card tool" href="refinance.html">
+      <span class="icon-tile"><i data-lucide="repeat" width="24" height="24"></i></span>
+      <span class="tool__title">Refinance vs Retention</span>
+      <span class="tool__body">เทียบ 3 ทางเลือกหลังหักต้นทุนแฝง รู้จุดคุ้มทุนและ Target Retention Rate</span>
+      <span class="tool__cta">เช็กว่าคุ้มไหม <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a class="card tool" href="refinance-6y.html">
+      <span class="icon-tile"><i data-lucide="calendar-range" width="24" height="24"></i></span>
+      <span class="tool__title">เทียบข้อเสนอ 6 ปี หลายธนาคาร</span>
+      <span class="tool__body">ข้อเสนอที่ถูกช่วงปีที่ 1–5 แล้วปีที่ 6 ลอยตัว เทียบต้นทุนจริง 6 ปีกับ Retention ได้สูงสุด 7 ธนาคาร</span>
+      <span class="tool__cta">เทียบข้อเสนอ <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a class="card tool" href="prepay.html">
+      <span class="icon-tile"><i data-lucide="piggy-bank" width="24" height="24"></i></span>
+      <span class="tool__title">คำนวณโปะบ้าน</span>
+      <span class="tool__body">โปะรายเดือนหรือก้อนเดียว ประหยัดดอกเบี้ยเท่าไหร่ ผ่อนหมดเร็วขึ้นกี่ปี พร้อมตารางผ่อน</span>
+      <span class="tool__cta">ลองคำนวณ <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a class="card tool" href="tax.html">
+      <span class="icon-tile"><i data-lucide="receipt-text" width="24" height="24"></i></span>
+      <span class="tool__title">ลดหย่อนภาษีดอกเบี้ยบ้าน</span>
+      <span class="tool__body">ดอกเบี้ยบ้านลดหย่อนได้สูงสุด ฿100,000/ปี รู้ว่าได้ภาษีคืนเท่าไหร่ รองรับกู้ร่วม</span>
+      <span class="tool__cta">ลองคำนวณ <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a class="card tool tool--doc" href="buy.html">
+      <span class="icon-tile icon-tile--gold"><i data-lucide="clipboard-check" width="24" height="24"></i></span>
+      <span class="tool__title">Homebuyer Readiness Report <span class="badge badge--accent">PDF</span></span>
+      <span class="tool__body">ใบสรุปความพร้อม 1 หน้า: วงเงินกู้ DSR ค่าใช้จ่ายวันโอน เช็กลิสต์เอกสาร ก่อนเข้าโครงการหรือยื่นกู้</span>
+      <span class="tool__cta">สร้างรายงาน <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a class="card tool tool--doc" href="refinance.html">
+      <span class="icon-tile icon-tile--gold"><i data-lucide="handshake" width="24" height="24"></i></span>
+      <span class="tool__title">Retention Negotiation Kit <span class="badge badge--accent">PDF</span></span>
+      <span class="tool__body">เอกสาร 1 หน้า พร้อม Target Retention Rate และประเด็นเจรจา พิมพ์หรือเปิดบนมือถือไปยื่นธนาคารเดิม</span>
+      <span class="tool__cta">สร้างเอกสาร <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ How it works ============ -->
+<section id="how" class="container section">
+  <div class="eyebrow">How it works</div>
+  <h2 class="h2">FinHome ทำงานอย่างไร</h2>
+  <div class="steps">
+    <div class="card step">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="icon-tile"><i data-lucide="pencil-line" width="24" height="24"></i></span><span class="step__num">01</span></div>
+      <div class="step__title">กรอกข้อมูลสินเชื่อและเงื่อนไข</div>
+      <div class="step__body">ยอดหนี้ ค่างวด หรือรายได้ — ใช้แค่ตัวเลข ไม่ต้องสมัครสมาชิก</div>
+    </div>
+    <div class="card step">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="icon-tile"><i data-lucide="calculator" width="24" height="24"></i></span><span class="step__num">02</span></div>
+      <div class="step__title">คำนวณต้นทุนแฝงและดอกเบี้ยขั้นบันได</div>
+      <div class="step__body">รวมค่าจดจำนอง ค่าประเมิน MRTA อากร ค่าปรับไถ่ถอน และดอกเบี้ยลอยตัวหลังหมดโปรฯ ให้ครบ</div>
+    </div>
+    <div class="card step">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="icon-tile icon-tile--gold"><i data-lucide="file-down" width="24" height="24"></i></span><span class="step__num">03</span></div>
+      <div class="step__title">รับเอกสารสรุป ไปคุยกับธนาคาร</div>
+      <div class="step__body">ดาวน์โหลด PDF 1 หน้า พร้อมตัวเลขเปรียบเทียบและอัตราเป้าหมาย ใช้ต่อรองหรือเตรียมยื่นกู้ได้ทันที</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Privacy promise ============ -->
+<section class="container section">
+  <div class="promise">
+    <div class="promise__head">
+      <span class="icon-tile icon-tile--glass"><i data-lucide="shield-check" width="24" height="24"></i></span>
+      <div>
+        <div class="eyebrow" style="color:var(--gold-300)">Privacy by design</div>
+        <h2>ข้อมูลของคุณ อยู่ในเครื่องของคุณเท่านั้น</h2>
+      </div>
+    </div>
+    <div class="promise__grid">
+      <div><b>คำนวณในเบราว์เซอร์ 100%</b><span>ตัวเลขที่กรอกไม่ถูกส่งไปที่เซิร์ฟเวอร์ใดเลย</span></div>
+      <div><b>ไม่ต้องสมัคร ไม่เก็บข้อมูล</b><span>ไม่มีบัญชีผู้ใช้ ไม่เก็บชื่อ เบอร์โทร อีเมล หรือรายได้</span></div>
+      <div><b>เอกสาร PDF สร้างในเครื่อง</b><span>รายงานถูกสร้างบนอุปกรณ์ของคุณ และเป็นของคุณคนเดียว</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คำนวณวงเงินกู้และค่างวดซื้อบ้าน — FinHome</title>
+<meta name="description" content="คำนวณวงเงินกู้บ้านสูงสุดตามเกณฑ์ DSR ค่างวดต่อเดือน ค่าใช้จ่ายวันโอน และทดสอบกรณีดอกเบี้ยขึ้น พร้อมสร้างรายงานความพร้อมก่อนกู้ (PDF) ฟรี ไม่เก็บข้อมูล">
+<meta name="theme-color" content="#1E3A8A">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=16">
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous" defer></script>
+<script src="js/core.js?v=5" defer></script>
+<script src="js/calc.js?v=4" defer></script>
+<script src="js/info.js?v=4" defer></script>
+<script src="js/buy.js?v=2" defer></script>
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+<section class="calc calc--tinted">
+  <div class="container calc__inner">
+    <div class="calc__head">
+      <div class="eyebrow eyebrow--lg">สำหรับคนอยากมีบ้าน</div>
+      <h1 class="calc__title">คำนวณวงเงินกู้และค่างวดซื้อบ้านใหม่</h1>
+      <p>รู้วงเงินกู้สูงสุดตามเกณฑ์ DSR ค่างวดต่อเดือน เงินที่ต้องเตรียมในวันโอน และค่างวดถ้าดอกเบี้ยขึ้น</p>
+    </div>
+
+    <div class="calc__cols">
+      <form class="card panel calc__inputs" onsubmit="return false" aria-label="ข้อมูลบ้านและรายได้">
+        <div class="card-title">ข้อมูลบ้านและรายได้</div>
+        <label class="field"><span class="field__label">ราคาบ้านที่ต้องการ</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="price" data-fmt="money"></span></label>
+        <label class="field"><span class="field__label">เงินดาวน์</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="down" data-fmt="money"></span><span class="field__hint" id="downHint"></span></label>
+        <div class="grid-2">
+          <label class="field"><span class="field__label">รายได้ต่อเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="income" data-fmt="money"></span></label>
+          <label class="field"><span class="field__label">ภาระหนี้ต่อเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="debt" data-fmt="money"></span></label>
+        </div>
+        <div class="grid-2">
+          <label class="field"><span class="field__label">ระยะเวลากู้</span><span class="field__box"><input inputmode="numeric" data-k="years"><span class="field__suffix">ปี</span></span></label>
+          <label class="field"><span class="field__label">ดอกเบี้ยเฉลี่ย 3 ปีแรก</span><span class="field__box"><input inputmode="decimal" data-k="rate"><span class="field__suffix">%</span></span></label>
+        </div>
+        <div class="toggle-row">
+          <button type="button" class="switch" role="switch" aria-checked="false" id="measureSwitch" aria-labelledby="measureLabel"><span class="switch__track"><span class="switch__thumb"></span></span></button>
+          <div>
+            <div class="cost-row__label" id="measureLabel">ใช้มาตรการลดค่าโอน-จดจำนองของรัฐ</div>
+            <div class="cost-row__hint">ค่าโอนและค่าจดจำนองเหลือ 0.01% · เปิดเฉพาะเมื่อมีมาตรการและบ้านเข้าเงื่อนไข ตรวจสอบมาตรการล่าสุดก่อนใช้</div>
+          </div>
+        </div>
+        <details class="dsr">
+          <summary class="note dsr__summary"><i data-lucide="info" width="14" height="14"></i><span>ประเมินด้วยเกณฑ์ DSR 40% ของรายได้ · <u>DSR คืออะไร?</u></span><i data-lucide="chevron-down" width="14" height="14" class="dsr__chev"></i></summary>
+          <div class="dsr__body">
+            <p><b>DSR (Debt Service Ratio)</b> คือสัดส่วนภาระหนี้ทั้งหมดที่ต้องจ่ายในแต่ละเดือน เทียบกับรายได้ทั้งหมดต่อเดือน เป็นตัวชี้วัดความสามารถในการชำระหนี้ที่สถาบันการเงินใช้พิจารณา</p>
+            <div class="dsr__levels">
+              <div class="dsr__level dsr__level--good"><span>สุขภาพการเงินที่ดี</span><b>ไม่ควรเกิน 40%</b></div>
+              <div class="dsr__level dsr__level--bad"><span>สุขภาพการเงินที่อันตราย</span><b>มากกว่า 50%</b></div>
+            </div>
+            <div class="dsr__label">สูตรการคำนวณ</div>
+            <div class="dsr__formula">
+              <span class="dsr__frac"><span>ภาระหนี้สินรวมต่อเดือน</span><span>รายได้รวมต่อเดือน</span></span>
+              <span>× 100 = <b>DSR (%)</b></span>
+            </div>
+            <div class="dsr__label">ตัวอย่าง</div>
+            <p>มีภาระผ่อนรถและบัตรเครดิตรวมเดือนละ ฿20,000 และมีรายได้ต่อเดือน ฿35,000</p>
+            <div class="dsr__formula">
+              <span class="dsr__frac"><span>20,000</span><span>35,000</span></span>
+              <span>× 100 = <b class="dsr__danger">57.14%</b></span>
+            </div>
+            <p class="dsr__foot">เกิน 50% ถือว่าอยู่ในระดับอันตราย ธนาคารมีโอกาสไม่อนุมัติหรือลดวงเงินกู้</p>
+          </div>
+        </details>
+      </form>
+
+      <div class="calc__results" aria-live="polite">
+        <div class="hero-result hero-result--row">
+          <div>
+            <div class="on-navy-muted">วงเงินกู้สูงสุดที่เป็นไปได้</div>
+            <div class="big-num" id="buyMaxLoan">—</div>
+            <div class="on-navy-muted" style="margin-top:4px">ยอดที่ต้องกู้จริง <b class="disp" style="color:#fff;font-weight:600" id="buyLoan">—</b></div>
+          </div>
+          <div class="status-col">
+            <span class="badge" id="buyStatus"><span class="dot"></span><span></span></span>
+            <div class="on-navy-muted" id="buyStatusNote"></div>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <div class="card rcard">
+            <div>
+              <div class="label-sm">ค่างวดผ่อนต่อเดือน</div>
+              <div class="disp strong" style="font-weight:600;font-size:32px;line-height:1.2" id="buyPay">—</div>
+              <div class="label-sm">DSR หลังกู้ <b id="buyDsr">—</b></div>
+            </div>
+            <div class="split-bar"><span id="buyPrinBar" style="background:var(--navy-700)"></span><span style="flex:1;background:var(--gold-500)"></span></div>
+            <div class="legend">
+              <div><div class="legend__key"><span class="legend__sw" style="background:var(--navy-700)"></span>ตัดเงินต้น (เดือนแรก)</div><div class="legend__val" id="buyPrin">—</div></div>
+              <div><div class="legend__key"><span class="legend__sw" style="background:var(--gold-500)"></span>จ่ายดอกเบี้ย (เดือนแรก)</div><div class="legend__val" id="buyInt">—</div></div>
+            </div>
+          </div>
+          <div class="card rcard rcard--tight">
+            <div class="label-sm">ค่าใช้จ่ายวันโอน (ประมาณการ)</div>
+            <div id="buyCosts" style="display:flex;flex-direction:column;gap:12px"></div>
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-weight:600;color:var(--text-strong)">รวม</span><span class="disp strong" style="font-weight:600;font-size:22px" id="buyCostTotal">—</span></div>
+            <div style="font-size:12px;color:var(--text-muted)">เตรียมเงินสดวันโอนรวมเงินดาวน์ <b class="strong" id="buyCashNeed">—</b></div>
+          </div>
+        </div>
+
+        <div class="card rcard">
+          <div style="display:flex;align-items:center;gap:8px"><i data-lucide="trending-up" width="18" height="18" style="color:var(--gold-700)"></i><div class="card-title" style="font-size:16px">ถ้าดอกเบี้ยขึ้น ยังผ่อนไหวไหม?</div></div>
+          <div class="stress" id="stressTable" role="table" aria-label="ค่างวดเมื่อดอกเบี้ยขึ้น"></div>
+          <div class="label-sm">ดอกเบี้ยบ้านส่วนใหญ่เป็นแบบลอยตัวหลังหมดโปรโมชัน ควรเผื่อให้ DSR ยังไม่เกิน 50% แม้ดอกเบี้ยขึ้น 2%</div>
+        </div>
+
+        <div class="report-cta">
+          <span class="icon-tile icon-tile--gold"><i data-lucide="file-text" width="24" height="24"></i></span>
+          <div class="report-cta__text">
+            <div class="report-cta__title">Homebuyer Readiness Report</div>
+            <div class="report-cta__sub">ใบสรุปความพร้อมทางการเงิน 1 หน้า: วงเงินกู้ DSR ค่าใช้จ่ายวันโอน และเช็กลิสต์เอกสาร พิมพ์หรือบันทึกเป็น PDF ไปใช้ก่อนเข้าโครงการหรือยื่นกู้</div>
+          </div>
+          <a class="btn btn--primary" id="reportLink" href="report.html"><i data-lucide="file-down" width="18" height="18"></i>สร้างรายงาน PDF</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# local preview / editor settings
+.claude/
+.vscode/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

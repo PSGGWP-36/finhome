@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คำนวณโปะบ้าน ประหยัดดอกเบี้ยเท่าไหร่ — FinHome</title>
+<meta name="description" content="คำนวณการโปะบ้าน โปะรายเดือนหรือโปะก้อนเดียว ประหยัดดอกเบี้ยได้เท่าไหร่ ผ่อนหมดเร็วขึ้นกี่ปี พร้อมตารางผ่อนชำระรายปี ฟรี ไม่เก็บข้อมูล">
+<meta name="theme-color" content="#1E3A8A">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=16">
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous" defer></script>
+<script src="js/core.js?v=5" defer></script>
+<script src="js/calc.js?v=4" defer></script>
+<script src="js/prepay.js?v=2" defer></script>
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+<section class="calc calc--tinted">
+  <div class="container calc__inner">
+    <div class="calc__head">
+      <div class="eyebrow eyebrow--lg">สำหรับคนผ่อนบ้านอยู่แล้ว</div>
+      <h1 class="calc__title">โปะบ้านเดือนละนิด ประหยัดดอกเบี้ยเท่าไหร่?</h1>
+      <p>ลองใส่เงินโปะเพิ่มต่อเดือน หรือโปะก้อนเดียว แล้วดูว่าดอกเบี้ยลดลงเท่าไหร่ และผ่อนหมดเร็วขึ้นกี่ปี</p>
+    </div>
+
+    <div class="calc__cols">
+      <form class="card panel calc__inputs" onsubmit="return false" aria-label="ข้อมูลสินเชื่อและการโปะ">
+        <div class="card-title">สินเชื่อปัจจุบัน</div>
+        <label class="field"><span class="field__label">ยอดหนี้คงเหลือ</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="bal" data-fmt="money"></span></label>
+        <div class="grid-2">
+          <label class="field"><span class="field__label">ดอกเบี้ยเฉลี่ย</span><span class="field__box"><input inputmode="decimal" data-k="rate"><span class="field__suffix">%</span></span></label>
+          <label class="field"><span class="field__label">ค่างวดต่อเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="pay" data-fmt="money"></span><span class="field__hint field__hint--warn" id="payHint" hidden></span></label>
+        </div>
+        <div class="card-title" style="margin-top:4px">แผนโปะของคุณ</div>
+        <label class="field"><span class="field__label">โปะเพิ่มทุกเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="extra" data-fmt="money"></span><span class="field__hint">จ่ายมากกว่าค่างวดปกติเดือนละเท่านี้</span></label>
+        <label class="field"><span class="field__label">โปะก้อนเดียว (ตอนนี้)</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="lump" data-fmt="money"></span><span class="field__hint">เช่น โบนัส หรือเงินเก็บที่ไม่ได้ใช้</span></label>
+        <div class="note"><i data-lucide="info" width="14" height="14"></i><span>สมมติว่าดอกเบี้ยคงที่ตลอดสัญญา และเงินที่โปะไปตัดเงินต้นทั้งหมด ก่อนโปะควรสอบถามธนาคารเรื่องเงื่อนไขและค่าปรับ (โดยเฉพาะการปิดบัญชีภายใน 3 ปีแรก)</span></div>
+      </form>
+
+      <div class="calc__results" aria-live="polite">
+        <div class="hero-result hero-result--col">
+          <div class="on-navy-muted">ถ้าโปะตามแผนนี้</div>
+          <div class="pp-hero">
+            <div>
+              <div class="on-navy-muted" style="font-size:13px">ประหยัดดอกเบี้ย</div>
+              <div class="big-num" id="ppSaved" style="color:var(--gold-300)">—</div>
+            </div>
+            <div>
+              <div class="on-navy-muted" style="font-size:13px">ผ่อนหมดเร็วขึ้น</div>
+              <div class="big-num" id="ppFaster">—</div>
+            </div>
+          </div>
+          <div class="kpis">
+            <div class="kpi kpi--glass">
+              <div class="kpi__label"><i data-lucide="calendar-clock" width="16" height="16"></i>ผ่อนแบบเดิม</div>
+              <div class="kpi__val" id="ppBaseTime">—</div>
+              <div class="kpi__note" id="ppBaseInt"></div>
+            </div>
+            <div class="kpi kpi--glass">
+              <div class="kpi__label"><i data-lucide="piggy-bank" width="16" height="16"></i>ผ่อนแบบโปะ</div>
+              <div class="kpi__val" id="ppPlanTime">—</div>
+              <div class="kpi__note" id="ppPlanInt"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card rcard">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div class="card-title" style="font-size:16px">ยอดหนี้คงเหลือแต่ละปี <span class="label-sm" style="font-weight:400">(แกนนอน = ปีที่)</span></div>
+            <div class="chart-legend"><span><i style="background:var(--slate-400)"></i>ผ่อนแบบเดิม</span><span><i style="background:var(--navy-700)"></i>ผ่อนแบบโปะ</span></div>
+          </div>
+          <div id="ppChart" class="chart"></div>
+        </div>
+
+        <div class="card rcard">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div class="card-title" style="font-size:16px">ตารางผ่อนชำระรายปี (แบบโปะ)</div>
+            <button type="button" class="btn btn--secondary btn--sm" id="csvBtn"><i data-lucide="download" width="16" height="16"></i>ดาวน์โหลด CSV</button>
+          </div>
+          <div class="sched-wrap"><table class="sched" id="ppTable"></table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+</body>
+</html>

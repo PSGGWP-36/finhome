@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คำนวณลดหย่อนภาษีดอกเบี้ยบ้าน — FinHome</title>
+<meta name="description" content="คำนวณภาษีที่ประหยัดได้จากการลดหย่อนดอกเบี้ยเงินกู้ซื้อบ้าน สูงสุด 100,000 บาทต่อปี รองรับกรณีกู้ร่วม ฟรี ไม่เก็บข้อมูล">
+<meta name="theme-color" content="#1E3A8A">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=16">
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous" defer></script>
+<script src="js/core.js?v=5" defer></script>
+<script src="js/calc.js?v=4" defer></script>
+<script src="js/tax.js?v=1" defer></script>
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+<section class="calc calc--white">
+  <div class="container calc__inner">
+    <div class="calc__head">
+      <div class="eyebrow eyebrow--lg">สิทธิที่คนผ่อนบ้านไม่ควรพลาด</div>
+      <h1 class="calc__title">ดอกเบี้ยบ้าน ลดหย่อนภาษีได้เท่าไหร่?</h1>
+      <p>ดอกเบี้ยเงินกู้ซื้อบ้านนำไปลดหย่อนภาษีได้สูงสุด ฿100,000 ต่อปี ลองคำนวณว่าคุณจะได้ภาษีคืนหรือจ่ายน้อยลงเท่าไหร่</p>
+    </div>
+
+    <div class="calc__cols">
+      <form class="card panel calc__inputs" onsubmit="return false" aria-label="ข้อมูลรายได้และดอกเบี้ย">
+        <div class="card-title">รายได้และดอกเบี้ยบ้านทั้งปี</div>
+        <label class="field"><span class="field__label">รายได้ทั้งปี (เงินเดือน + โบนัส)</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="income" data-fmt="money"></span><span class="field__hint">คำนวณแบบเงินได้จากเงินเดือน หักค่าใช้จ่าย 50% ไม่เกิน ฿100,000 และลดหย่อนส่วนตัว ฿60,000 ให้อัตโนมัติ</span></label>
+        <label class="field"><span class="field__label">ค่าลดหย่อนอื่นๆ รวม</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="other" data-fmt="money"></span><span class="field__hint">เช่น ประกันสังคม ประกันชีวิต กองทุนสำรองเลี้ยงชีพ (ไม่รวมดอกเบี้ยบ้าน)</span></label>
+        <label class="field"><span class="field__label">ดอกเบี้ยบ้านที่จ่ายทั้งปี</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="interest" data-fmt="money"></span><span class="field__hint">ดูได้จากหนังสือรับรองการชำระดอกเบี้ยที่ธนาคารออกให้ทุกปี</span></label>
+        <label class="field"><span class="field__label">จำนวนผู้กู้ร่วม (รวมคุณ)</span><span class="field__box"><input inputmode="numeric" data-k="borrowers"><span class="field__suffix">คน</span></span><span class="field__hint">กู้ร่วม: ใช้สิทธิเฉลี่ยเท่ากันทุกคน รวมกันไม่เกิน ฿100,000</span></label>
+      </form>
+
+      <div class="calc__results" aria-live="polite">
+        <div class="hero-result hero-result--col">
+          <div class="on-navy-muted">ภาษีที่ประหยัดได้ต่อปีจากดอกเบี้ยบ้าน</div>
+          <div class="big-num" id="txSaved" style="color:var(--gold-300)">—</div>
+          <div class="on-navy-muted" id="txLine"></div>
+        </div>
+
+        <div class="card rcard rcard--tight">
+          <div class="label-sm">รายละเอียดการคำนวณ (ของคุณ 1 คน)</div>
+          <div id="txRows" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+
+        <div class="card rcard">
+          <div style="display:flex;align-items:center;gap:8px"><i data-lucide="lightbulb" width="18" height="18" style="color:var(--gold-700)"></i><div class="card-title" style="font-size:16px">เกร็ดน่ารู้</div></div>
+          <ul class="tips">
+            <li>ใช้สิทธิได้เฉพาะดอกเบี้ยเงินกู้เพื่อซื้อ เช่าซื้อ หรือสร้างที่อยู่อาศัย ที่จำนองไว้กับผู้ให้กู้</li>
+            <li>รวมทุกสัญญาแล้วลดหย่อนได้ไม่เกิน ฿100,000 ต่อปี</li>
+            <li>หากดอกเบี้ยที่จ่ายเกิน ฿100,000 การ<a href="prepay.html">โปะบ้าน</a>หรือ<a href="refinance.html">ลดดอกเบี้ย</a>จะไม่ทำให้สิทธิลดหย่อนลดลง</li>
+            <li>เก็บหนังสือรับรองดอกเบี้ยจากธนาคารไว้เป็นหลักฐานยื่นภาษี</li>
+          </ul>
+          <div class="label-sm">อัตราภาษีและเงื่อนไขอ้างอิงหลักเกณฑ์ทั่วไปของกรมสรรพากร อาจมีการเปลี่ยนแปลง ตรวจสอบกับกรมสรรพากรก่อนยื่นภาษีทุกครั้ง</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เอกสารสรุปแผน — FinHome</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1E3A8A">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=16">
+<link rel="stylesheet" href="css/report.css?v=3">
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous" defer></script>
+<script src="js/core.js?v=5" defer></script>
+<script src="js/calc.js?v=4" defer></script>
+<script src="js/report.js?v=4" defer></script>
+</head>
+<body class="report-body">
+<header id="site-header" class="no-print"></header>
+
+<main class="report-page">
+  <div class="container report-toolbar no-print">
+    <a class="legal__back" id="editLink" href="index.html"><i data-lucide="arrow-left" width="16" height="16"></i>แก้ไขข้อมูล</a>
+    <div class="report-toolbar__row">
+      <label class="field" style="flex:1 1 220px"><span class="field__label">ชื่อผู้กู้ (ไม่บังคับ)</span><span class="field__box"><input id="rpName" maxlength="60" autocomplete="off" placeholder="แสดงบนเอกสารเท่านั้น ไม่ถูกเก็บ"></span></label>
+      <label class="field" style="flex:1 1 220px" id="occField" hidden><span class="field__label">อาชีพ (สำหรับเช็กลิสต์เอกสาร)</span><span class="select"><select id="rpOcc"><option value="salaried">พนักงานประจำ</option><option value="freelance">ฟรีแลนซ์ / อาชีพอิสระ</option><option value="business">เจ้าของกิจการ</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span></label>
+      <button type="button" class="btn btn--primary" id="printBtn"><i data-lucide="file-down" width="18" height="18"></i>บันทึก PDF / พิมพ์</button>
+    </div>
+    <div class="note"><i data-lucide="info" width="14" height="14"></i><span>กดปุ่มแล้วเลือกเครื่องพิมพ์เป็น <b>"บันทึกเป็น PDF" (Save as PDF)</b> · บนมือถือ เลือก แชร์ → พิมพ์ แล้วบันทึกเป็น PDF · หรือเปิดหน้านี้โชว์พนักงานได้เลย เอกสารสร้างในเครื่องของคุณ ไม่ถูกส่งไปที่ไหน</span></div>
+  </div>
+
+  <article class="paper" id="paper" aria-live="polite"></article>
+</main>
+
+<footer id="site-footer" class="no-print"></footer>
+</body>
+</html>
