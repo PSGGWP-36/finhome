@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /report
 Disallow: /report.html
+
+Sitemap: https://finhomethailand.com/sitemap.xml
