@@ -3,6 +3,11 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "finhome",
   "compatibility_date": "2026-11-01",
+  // custom domains (registered on Cloudflare)
+  "routes": [
+    { "pattern": "finhomethailand.com", "custom_domain": true },
+    { "pattern": "www.finhomethailand.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./",
     // serve 404.html for unknown addresses
