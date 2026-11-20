@@ -526,3 +526,18 @@ a.choice:hover,a.tool:hover{text-decoration:none}
   .cost-row__extra{padding-left:0}
   .eyebrow--lg{font-size:16px}
 }
+
+/* ---------- Support (QR) ---------- */
+.footer__support{display:inline-flex;align-items:center;gap:8px;color:var(--gold-300);font-family:var(--font-display);font-weight:500;font-size:14px;text-decoration:none}
+.footer__support:hover{color:#fff}
+.support-note{display:flex;gap:10px;align-items:center;margin:0;padding:14px 16px;border:1px dashed var(--border-subtle);border-radius:var(--radius-lg);font-size:14px;color:var(--text-muted);background:var(--surface-card)}
+.support-note svg{color:var(--gold-600);flex:none}
+.support-note a{font-weight:600}
+.support-card{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:32px;align-items:start;margin:28px 0 8px;padding:24px;background:#fff;border:1px solid var(--border-subtle);border-radius:var(--radius-xl)}
+.support-card__qr img{display:block;width:100%;height:auto;border-radius:var(--radius-lg)}
+.legal .support-card h2{margin-top:0}
+.support-steps{padding-left:22px;margin:8px 0 16px}
+.support-card__recipient{display:flex;gap:8px;align-items:flex-start;font-size:14px!important;color:var(--text-muted);margin:0 0 16px}
+.support-card__recipient svg{flex:none;margin-top:3px;color:var(--status-success)}
+@media (max-width:720px){.support-card{grid-template-columns:1fr;padding:20px}.support-card__qr{max-width:300px;width:100%;margin:0 auto}}
+@media print{.support-note{display:none}}

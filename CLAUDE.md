@@ -18,12 +18,13 @@ Owner works in Thai, is non-technical, and prefers to **verify financial logic b
 | `refinance-6y.html` | `refinance6.js` | **6-year** multi-bank offer comparison (up to 7 banks, yearly rates y1–y5 + y6 float) vs Retention |
 | `prepay.html` / `tax.html` | `prepay.js` / `tax.js` | Prepayment (โปะบ้าน) schedule + CSV; home-loan interest tax deduction |
 | `report.html` | `report.js` + `css/report.css` | One-page A4 reports, printed/saved via `window.print()` (no PDF library — Thai shaping) |
+| `support.html` | — | Support/"เลี้ยงกาแฟ" page with static PromptPay QR (`assets/support-qr.jpg`, TrueMoney wallet). `core.js` adds a footer link and a `.support-note` line under `.calc__results` (hidden in print, never in reports) |
 | `privacy.html`, `404.html` | — | Policy (owner: FinHome, contact.finhome@gmail.com, host Cloudflare) |
 
 Shared JS: `core.js` (helpers, layout header/footer injection, hash state, form binding), `calc.js` (all pure calculations), `info.js` (ⓘ popups: mrta, horizon, contract, effective), `refi-common.js` (hidden-cost rows, page tabs).
 
 ## Conventions / gotchas
-- **Cache busting:** every page links assets with `?v=N`. When you change a CSS/JS file, bump its `?v=` in **all** HTML files. Current: styles v17, tokens v5, report.css v3, core v5, calc v4, info v4, refi-common v1, refinance v7, refinance6 v2, report v4, buy v2, prepay v2, tax v1.
+- **Cache busting:** every page links assets with `?v=N`. When you change a CSS/JS file, bump its `?v=` in **all** HTML files. Current: styles v18, tokens v5, report.css v3, core v6, calc v4, info v4, refi-common v1, refinance v7, refinance6 v2, report v4, buy v2, prepay v2, tax v1.
 - `css/styles.css` starts with `@charset "UTF-8";` (Thai text in CSS `content:`) and uses **CRLF** line endings — Git Bash `sed -i` rewrites it to LF and the whole file shows as changed; restore CRLF before committing.
 - Files are UTF-8 **without** BOM. Windows PowerShell 5.1 scripts containing Thai need a BOM to run.
 - `.sr-only` is absolutely positioned: scroll containers holding it need `position:relative` (caused a page-width overflow once).
@@ -43,7 +44,7 @@ Shared JS: `core.js` (helpers, layout header/footer injection, hash state, form 
 - GitHub `PSGGWP-36/finhome`, branch `main` → **Cloudflare Workers static assets** deploys automatically (~30–60 s). Config: `wrangler.jsonc` (worker `finhome`, custom domains, `not_found_handling: 404-page`), `_headers` (CSP, X-Frame-Options, cache), `.assetsignore` (keeps .md, .ps1, config off the site). Listing custom domains disables the workers.dev URL (intended).
 - www → root is a Cloudflare **Redirect Rule** (dashboard, 301, preserve query string).
 - `git.exe` is at `C:\Program Files\Git\cmd\git.exe` (may not be on PATH). Commits use local identity `FinHome <contact.finhome@gmail.com>`. Saved GitHub login works for non-interactive push; if a login is needed, run the push in the Terminal panel.
-- Share images (`assets/og/*.png`, 1200×630) were generated with a System.Drawing script using the Leelawadee UI font; OG/canonical tags sit between `<!-- share:start -->` / `<!-- share:end -->` in each page. `sitemap.xml` lists the 7 indexable pages.
+- Share images (`assets/og/*.png`, 1200×630) were generated with a System.Drawing script using the Leelawadee UI font; OG/canonical tags sit between `<!-- share:start -->` / `<!-- share:end -->` in each page. `sitemap.xml` lists the 8 indexable pages.
 - `prepare-upload.ps1` builds `..\FinHome-upload` for a manual drag-and-drop upload (not needed with Git deploys).
 
 ## Status / next

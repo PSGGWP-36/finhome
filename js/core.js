@@ -166,6 +166,7 @@
             <img src="assets/logo-wordmark-white.png" alt="FinHome.">
             <p>ผู้ช่วยการเงินเรื่องบ้าน ให้ทุกการผ่อน “<span style="color:var(--gold-300);font-weight:600">ฟิน</span>” ขึ้น</p>
             <p class="footer__privacy"><i data-lucide="shield-check" width="16" height="16"></i>คำนวณในเครื่องของคุณ 100% ไม่เก็บข้อมูล</p>
+            <p><a class="footer__support" href="support.html"><i data-lucide="coffee" width="16" height="16"></i>สนับสนุน FinHome (เลี้ยงกาแฟ)</a></p>
           </div>
           <div class="footer__links">
             <b>เครื่องมือ</b>
@@ -176,7 +177,15 @@
             <div><b>คำสงวนสิทธิ์</b><br>ผลการคำนวณบนเว็บไซต์นี้เป็นการประมาณการเบื้องต้นเพื่อประกอบการตัดสินใจเท่านั้น ไม่ใช่ข้อเสนอสินเชื่อหรือคำแนะนำทางการเงินเฉพาะบุคคล อัตราดอกเบี้ย ค่าธรรมเนียม วงเงินอนุมัติ และเงื่อนไขจริงขึ้นอยู่กับนโยบายและการพิจารณาของแต่ละธนาคาร</div>
           </div>
         </div>
-        <div class="container footer__bottom"><span>© 2026 FinHome</span><span><a href="privacy.html">นโยบายความเป็นส่วนตัว</a> · <a href="privacy.html#contact">ติดต่อเรา</a></span></div>`;
+        <div class="container footer__bottom"><span>© 2026 FinHome</span><span><a href="privacy.html">นโยบายความเป็นส่วนตัว</a> · <a href="privacy.html#contact">ติดต่อเรา</a> · <a href="support.html">สนับสนุนเรา</a></span></div>`;
+    }
+    // gentle support line under the results of every calculator page (hidden in print)
+    const results = document.querySelector('.calc__results');
+    if (results && !results.querySelector('.support-note')) {
+      const note = document.createElement('p');
+      note.className = 'support-note';
+      note.innerHTML = '<i data-lucide="coffee" width="18" height="18"></i><span>FinHome ใช้ฟรีและไม่เก็บข้อมูล ถ้าเครื่องมือนี้ช่วยคุณได้ <a href="support.html">เลี้ยงกาแฟเราสักแก้ว</a></span>';
+      results.appendChild(note);
     }
   };
   FH.icons = () => { if (window.lucide) window.lucide.createIcons({ attrs: { 'stroke-width': 1.75 } }); };
