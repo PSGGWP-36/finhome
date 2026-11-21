@@ -29,8 +29,8 @@
 <link rel="stylesheet" href="css/styles.css?v=18">
 <script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous" defer></script>
 <script src="js/core.js?v=6" defer></script>
-<script src="js/calc.js?v=4" defer></script>
-<script src="js/prepay.js?v=2" defer></script>
+<script src="js/calc.js?v=5" defer></script>
+<script src="js/prepay.js?v=3" defer></script>
 </head>
 <body>
 <header id="site-header"></header>
@@ -50,8 +50,9 @@
         <label class="field"><span class="field__label">ยอดหนี้คงเหลือ</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="bal" data-fmt="money"></span></label>
         <div class="grid-2">
           <label class="field"><span class="field__label">ดอกเบี้ยเฉลี่ย</span><span class="field__box"><input inputmode="decimal" data-k="rate"><span class="field__suffix">%</span></span></label>
-          <label class="field"><span class="field__label">ค่างวดต่อเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="pay" data-fmt="money"></span><span class="field__hint field__hint--warn" id="payHint" hidden></span></label>
+          <label class="field"><span class="field__label">ระยะผ่อนคงเหลือ</span><span class="field__box"><input inputmode="numeric" data-k="years"><span class="field__suffix">ปี</span></span></label>
         </div>
+        <label class="field"><span class="field__label">ค่างวดต่อเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="pay" data-fmt="money"></span><span class="field__hint" id="payNote"></span><span class="field__hint field__hint--warn" id="payHint" hidden></span></label>
         <div class="card-title" style="margin-top:4px">แผนโปะของคุณ</div>
         <label class="field"><span class="field__label">โปะเพิ่มทุกเดือน</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="extra" data-fmt="money"></span><span class="field__hint">จ่ายมากกว่าค่างวดปกติเดือนละเท่านี้</span></label>
         <label class="field"><span class="field__label">โปะก้อนเดียว (ตอนนี้)</span><span class="field__box"><span class="field__affix">฿</span><input inputmode="numeric" data-k="lump" data-fmt="money"></span><span class="field__hint">เช่น โบนัส หรือเงินเก็บที่ไม่ได้ใช้</span></label>

@@ -4,6 +4,17 @@
   const { $, baht, setText } = FH;
   const state = FH.mergeState(FH.PREPAY_DEFAULTS, FH.readHash().data);
   let last = null;
+  // true = the payment is the user's own figure; false = derived from the remaining years
+  let payManual = true;
+  function onChange(k) {
+    if (k === 'pay') payManual = true;
+    if (k === 'years') payManual = false;
+    if (!payManual && (k === 'years' || k === 'bal' || k === 'rate')) {
+      const auto = FH.prepayAutoPay(state.f);
+      if (auto) { state.f.pay = FH.fmt(auto); FH.syncFields(state.f); }
+    }
+    render();
+  }
 
   function chart(base, plan) {
     const W = 640, H = 220, padL = 52, padR = 12, padT = 10, padB = 28;
@@ -29,6 +40,15 @@
     const hint = $('#payHint');
     hint.hidden = !(r.bal && r.pay && r.pay <= r.minPay);
     hint.textContent = 'ค่างวดต่ำกว่าดอกเบี้ยต่อเดือน (' + baht(r.minPay) + ') หนี้จะไม่ลดลง';
+    let note = '';
+    if (!r.termMonths) note = '';
+    else if (!payManual) note = 'คำนวณจากระยะผ่อนคงเหลือ · ถ้ารู้ค่างวดจริงจากธนาคาร พิมพ์ทับได้';
+    else if (r.base && r.termMonths) {
+      const d = r.base.months - r.termMonths;
+      note = 'ค่างวดนี้ผ่อนหมดใน ' + FH.months(r.base.months) +
+        (Math.abs(d) < 1 ? ' ตรงกับระยะผ่อนที่กรอก' : (d < 0 ? ' เร็วกว่า' : ' ช้ากว่า') + 'ระยะผ่อนที่กรอก ' + FH.months(Math.abs(d)));
+    }
+    setText('payNote', note);
     if (!r.ok) {
       ['ppSaved', 'ppFaster', 'ppBaseTime', 'ppPlanTime'].forEach(id => setText(id, '—'));
       setText('ppBaseInt', ''); setText('ppPlanInt', '');
@@ -50,7 +70,7 @@
   FH.ready(() => {
     FH.layout('prepay');
     FH.syncFields(state.f, true);
-    FH.bindFields(state.f, render);
+    FH.bindFields(state.f, onChange);
     $('#csvBtn').addEventListener('click', () => {
       if (!last || !last.ok) return;
       const rows = [['ปีที่', 'ตัดเงินต้น', 'ดอกเบี้ย', 'ยอดหนี้คงเหลือ']].concat(last.plan.years.map(y => [y.year, Math.round(y.principal), Math.round(y.interest), Math.round(y.balance)]));

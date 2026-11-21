@@ -24,7 +24,7 @@ Owner works in Thai, is non-technical, and prefers to **verify financial logic b
 Shared JS: `core.js` (helpers, layout header/footer injection, hash state, form binding), `calc.js` (all pure calculations), `info.js` (ⓘ popups: mrta, horizon, contract, effective), `refi-common.js` (hidden-cost rows, page tabs).
 
 ## Conventions / gotchas
-- **Cache busting:** every page links assets with `?v=N`. When you change a CSS/JS file, bump its `?v=` in **all** HTML files. Current: styles v18, tokens v5, report.css v3, core v6, calc v4, info v4, refi-common v1, refinance v7, refinance6 v2, report v4, buy v2, prepay v2, tax v1.
+- **Cache busting:** every page links assets with `?v=N`. When you change a CSS/JS file, bump its `?v=` in **all** HTML files. Current: styles v18, tokens v5, report.css v3, core v6, calc v5, info v4, refi-common v1, refinance v7, refinance6 v2, report v4, buy v2, prepay v3, tax v1.
 - `css/styles.css` starts with `@charset "UTF-8";` (Thai text in CSS `content:`) and uses **CRLF** line endings — Git Bash `sed -i` rewrites it to LF and the whole file shows as changed; restore CRLF before committing.
 - Files are UTF-8 **without** BOM. Windows PowerShell 5.1 scripts containing Thai need a BOM to run.
 - `.sr-only` is absolutely positioned: scroll containers holding it need `position:relative` (caused a page-width overflow once).

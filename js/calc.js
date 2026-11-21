@@ -233,7 +233,14 @@
   };
 
   /* ================= Prepayment (โปะบ้าน) ================= */
-  FH.PREPAY_DEFAULTS = { f: { bal: '2,450,000', rate: '3.50', pay: '18,500', extra: '3,000', lump: '0' } };
+  FH.PREPAY_DEFAULTS = { f: { bal: '2,450,000', rate: '3.50', years: '14', pay: '18,500', extra: '3,000', lump: '0' } };
+  /** Level monthly payment that clears `bal` in the remaining years (rounded up to whole baht); 0 if inputs are missing. */
+  FH.prepayAutoPay = f => {
+    const bal = num(f.bal), rate = num(f.rate), m = Math.round(Math.min(40, num(f.years)) * 12);
+    if (!bal || !m) return 0;
+    const i = rate / 1200;
+    return Math.ceil(i ? bal * i / (1 - Math.pow(1 + i, -m)) : bal / m);
+  };
 
   function runSchedule(bal, rate, pay, maxMonths = 720) {
     let b = bal, it = 0, m = 0;
@@ -263,6 +270,7 @@
     const plan = bal && pay ? runSchedule(Math.max(0, bal - lump), rate, pay + extra) : null;
     return {
       bal, rate, pay, extra, lump, minPay, base, plan,
+      termMonths: Math.round(Math.min(40, num(f.years)) * 12),
       ok: !!(base && plan),
       saved: base && plan ? base.interest - plan.interest : 0,
       monthsSaved: base && plan ? base.months - plan.months : 0
